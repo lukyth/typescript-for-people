@@ -1,22 +1,49 @@
+/// <reference path="../typings/jest/jest.d.ts" />
+
+import { Captcha } from '../src/Captcha'
+
 describe('Captcha', function() {
-  it('should be One + 1 when mode=1, left operand=1, operator=1, right operand=1', function() {
+  describe('pattern 1', function() {
+    it('should be "1 + Two" when left=1, right=2, operator=1', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(1, 1, 2, 1)).toEqual('1 + Two');
+    });
+
+    it('should be "1 + Three" when left=1, right=3, operator=1', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(1, 1, 3, 1)).toEqual('1 + Three');
+    });
+
+    it('should be "1 - Three" when left=1, right=3, operator=2', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(1, 1, 3, 2)).toEqual('1 - Three');
+    });
+
+    it('should be "1 * Three" when left=1, right=3, operator=3', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(1, 1, 3, 3)).toEqual('1 * Three');
+    });
   });
 
-  it('should be Two + 1 when mode=1, left operand=2, operator=1, right operand=1', function() {
-  });
+  describe('pattern 2', function() {
+    it('should be "1 + Two" when left=1, right=2, operator=1', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(2, 1, 2, 1)).toEqual('One + 2');
+    });
 
-  it('should be Three + 1 when mode=1, left operand=3, operator=1, right operand=1', function() {
-  });
+    it('should be "1 + Three" when left=1, right=3, operator=1', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(2, 1, 3, 1)).toEqual('One + 3');
+    });
 
-  it('should be One + 2 when mode=1, left operand=1, operator=1, right operand=2', function() {
-  });
+    it('should be "1 - Three" when left=1, right=3, operator=2', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(2, 1, 3, 2)).toEqual('One - 3');
+    });
 
-  it('should be 1 + One when mode=2, left operand=1, operator=1, right operand=1', function() {
-  });
-
-  it('should be 2 + One when mode=2, left operand=2, operator=1, right operand=1', function() {
-  });
-
-  it('should be 3 + One when mode=2, left operand=3, operator=1, right operand=1', function() {
+    it('should be "1 * Three" when left=1, right=3, operator=3', function() {
+      var captcha = new Captcha();
+      expect(captcha.generate(2, 1, 3, 3)).toEqual('One * 3');
+    });
   });
 });
